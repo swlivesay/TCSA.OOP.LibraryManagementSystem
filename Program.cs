@@ -1,8 +1,7 @@
-﻿using System.Net.Security;
-using Spectre.Console;
+﻿using Spectre.Console;
 
 
-string[] menuChoices = new string[3] {"View Books", "Add Book", "Delete Book"};
+
 List<string> books = new List<string>()
 {
     "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", 
@@ -14,16 +13,14 @@ while (true)
 {   
     Console.Clear(); 
 
-    string choice = AnsiConsole.Prompt
+    MenuOption choice = AnsiConsole.Prompt
     (
-        new SelectionPrompt<string>()
-        .Title("What do you want to do next?")
-        .AddChoices(menuChoices)   
+        new SelectionPrompt<MenuOption>().Title("What do you want to do next?").AddChoices(Enum.GetValues<MenuOption>())
     );
 
     switch (choice)
     {
-        case "View Books":
+        case MenuOption.ViewBooks:
             AnsiConsole.MarkupLine("[yellow]List of Books:[/]");
 
             foreach (string book in books)
@@ -34,7 +31,7 @@ while (true)
             AnsiConsole.MarkupLine("Press any key to  continue.");
             Console.ReadKey();
             break;
-        case "Add Book":
+        case MenuOption.AddBook:
             string title = AnsiConsole.Ask<string>("Enter the [green]title[/] of the bookto add:");
 
             if (books.Contains(title))
@@ -50,7 +47,7 @@ while (true)
             AnsiConsole.MarkupLine("Press any key to continue.");
             Console.ReadKey();
             break;
-        case "Delete Book":
+        case MenuOption.DeleteBook:
             if (books.Count == 0)
             {
                 AnsiConsole.MarkupLine("[red]No books available to delete");
@@ -74,4 +71,11 @@ while (true)
             AnsiConsole.MarkupLine("Press any key to continue.");
             break;
     }
+}
+
+enum MenuOption 
+{
+    ViewBooks, 
+    AddBook, 
+    DeleteBook
 }
