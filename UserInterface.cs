@@ -1,12 +1,13 @@
 using Spectre.Console;
 using TCSA.OOP.LibraryManagementSystem.Controllers;
+using TCSA.OOP.LibraryManagementSystem.Models;
 using static TCSA.OOP.LibraryManagementSystem.Enums;
 
 namespace TCSA.OOP.LibraryManagementSystem;
 
 internal class UserInterface
 {
-    private readonly BooksController _booksController = new();
+    private readonly BookController _booksController = new();
     private readonly MagazineController _magazinesController = new();
     private readonly NewspaperController _newspapersController = new();
 
